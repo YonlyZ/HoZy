@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA em Desenvolvimento</title>
+<style>
+  /* ===== RESET ===== */
+  * { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI",sans-serif; scroll-behavior: smooth; }
+  body { background:#0d0d0d; color:#f5f5f5; overflow-x:hidden; }
+
+  /* ===== HEADER ===== */
+  header { position:fixed; top:0; width:100%; background:#111; display:flex; justify-content:space-between; align-items:center; padding:15px 30px; z-index:1000; box-shadow:0 3px 10px rgba(0,0,0,0.5); }
+  header h1 { color:#00c3ff; font-size:1.5em; letter-spacing:2px; }
+  nav ul { list-style:none; display:flex; gap:20px; flex-wrap:wrap; }
+  nav ul li a { text-decoration:none; color:#f5f5f5; font-size:1em; transition:0.3s; cursor:pointer; }
+  nav ul li a:hover { color:#00c3ff; }
+
+  /* ===== SEÇÕES ===== */
+  section { min-height:100vh; padding:120px 20px 50px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; opacity:0; transform:translateY(50px); transition:all 0.8s ease; }
+  section.show { opacity:1; transform:translateY(0); }
+  section h2 { font-size:2.5em; margin-bottom:20px; color:#00c3ff; }
+  section p { font-size:1.2em; max-width:700px; line-height:1.6; }
+  section .card-container { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin-top:30px; }
+  section .card { background:#111; padding:20px; border-radius:15px; width:250px; transition:0.3s; cursor:pointer; box-shadow:0 5px 20px rgba(0,0,0,0.5); }
+  section .card:hover { transform:translateY(-10px) scale(1.05); background:#0a0a0a; }
+
+  /* ===== BOTÃO ===== */
+  .btn { padding:12px 25px; background:#00c3ff; color:#111; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:0.3s; margin-top:20px; }
+  .btn:hover { background:#00a0cc; transform:scale(1.05); }
+
+  /* ===== ANIMAÇÕES ===== */
+  .fadeIn { animation:fadeIn 1s forwards; }
+  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+  /* ===== FOOTER ===== */
+  footer { text-align:center; padding:30px 10px; background:#111; display:flex; flex-direction:column; gap:10px; }
+  footer a { color:#00c3ff; text-decoration:none; transition:0.3s; }
+  footer a:hover { color:#00a0cc; }
+
+  /* ===== RESPONSIVO ===== */
+  @media(max-width:768px){
+    nav ul { flex-direction:column; gap:10px; background:#111; position:absolute; top:70px; right:0; width:200px; padding:20px; display:none; border-left:2px solid #00c3ff; }
+    nav ul.show { display:flex; }
+    header { flex-direction:row; justify-content:space-between; }
+    .menu-toggle { display:block; cursor:pointer; color:#00c3ff; font-size:1.5em; }
+  }
+  .menu-toggle { display:none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>IA Dev</h1>
+  <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+  <nav>
+    <ul id="menu">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('sobre')">Sobre</a></li>
+      <li><a onclick="showPage('equipe')">Equipe</a></li>
+      <li><a onclick="showPage('blog')">Blog</a></li>
+      <li><a onclick="showPage('recursos')">Recursos</a></li>
+      <li><a onclick="showPage('faq')">FAQ</a></li>
+      <li><a onclick="showPage('teste')">Teste Beta</a></li>
+      <li><a onclick="showPage('contato')">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===== PÁGINAS ===== -->
+<section id="home" class="show">
+  <h2>Bem-vindo à IA em Desenvolvimento</h2>
+  <p>Estamos criando uma inteligência artificial revolucionária. Acompanhe nosso progresso e descubra o futuro da tecnologia!</p>
+  <button class="btn" onclick="showPage('sobre')">Saiba Mais</button>
+</section>
+
+<section id="sobre">
+  <h2>Sobre o Projeto</h2>
+  <p>Nosso projeto de IA foca em aprendizado contínuo, automação inteligente e interação intuitiva com usuários.</p>
+  <div class="card-container">
+    <div class="card">Aprendizado Contínuo</div>
+    <div class="card">Automação Inteligente</div>
+    <div class="card">Interação Intuitiva</div>
+  </div>
+  <button class="btn" onclick="showPage('home')">Voltar</button>
+</section>
+
+<section id="equipe">
+  <h2>Equipe</h2>
+  <div class="card-container">
+    <div class="card"><strong>Iken</strong><br>Desenvolvedor Principal</div>
+    <div class="card"><strong>Brekii</strong><br>Designer & UX</div>
+  </div>
+  <button class="btn" onclick="showPage('home')">Voltar</button>
+</section>
+
+<section id="blog">
+  <h2>Blog</h2>
+  <p>Fique por dentro das atualizações do nosso projeto e veja artigos exclusivos sobre IA.</p>
+  <div class="card-container">
+    <div class="card">Post 1: Introdução ao Projeto</div>
+    <div class="card">Post 2: Tecnologias Utilizadas</div>
+    <div class="card">Post 3: Futuro da IA</div>
+  </div>
+  <button class="btn" onclick="showPage('home')">Voltar</button>
+</section>
+
+<section id="recursos">
+  <h2>Recursos</h2>
+  <p>Veja os recursos que nossa IA oferecerá quando estiver completa.</p>
+  <div class="card-container">
+    <div class="card">Reconhecimento de Voz</div>
+    <div class="card">Automação de Tarefas</div>
+    <div class="card">Análise de Dados</div>
+    <div class="card">Integração com Apps</div>
+  </div>
+  <button class="btn" onclick="showPage('home')">Voltar</button>
+</section>
+
+<section id="faq">
+  <h2>Perguntas Frequentes</h2>
+  <div class="card-container">
+    <div class="card">Quando será lançado?<br>R: Em 2025.</div>
+    <div class="card">A IA será gratuita?<br>R: Terá versão gratuita e premium.</div>
+    <div class="card">Posso testar?<br>R: Sim, veja a seção Teste Beta.</div>
+  </div>
+  <button class="btn" onclick="showPage('home')">Voltar</button>
+</section>
+
+<section id="teste">
+  <h2>Teste Beta</h2>
+  <p>Cadastre-se para testar nossa IA antes do lançamento oficial.</p>
+  <button class="btn" onclick="window.location.href='https://frozenbot.vercel.app/'">Acessar Beta</button>
+  <button class="btn" onclick="showPage('home')">Voltar</button>
+</section>
+
+<section id="contato">
+  <h2>Contato</h2>
+  <p>Entre em contato via email: <strong>contato@ia.dev</strong></p>
+  <div class="card-container">
+    <div class="card">Twitter</div>
+    <div class="card">LinkedIn</div>
+    <div class="card">GitHub</div>
+  </div>
+  <button class="btn" onclick="showPage('home')">Voltar</button>
+</section>
+
+<footer>
+  <p>&copy; 2025 IA em Desenvolvimento. Todos os direitos reservados.</p>
+  <div>
+    <a href="#">Home</a> | <a href="#">Sobre</a> | <a href="#">Equipe</a> | <a href="#">Contato</a>
+  </div>
+</footer>
+
+<script>
+  function showPage(pageId) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => { sec.classList.remove('show'); });
+    const current = document.getElementById(pageId);
+    current.classList.add('show');
+  }
+
+  function toggleMenu(){
+    document.getElementById('menu').classList.toggle('show');
+  }
+
+  // ===== SCROLL ANIMATION =====
+  window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if(top < window.innerHeight - 100) sec.classList.add('show');
+    });
+  });
+</script>
+
+</body>
+</html>
